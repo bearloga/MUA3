@@ -19,9 +19,8 @@ server <- function(input, output) {
   })
 
   output$stat_maximizations <- DT::renderDataTable({
-    req(recommendations)
-    recs <- recommendations()$maximizations
-    recs %>%
+    req(recommendations()$maximizations)
+    recommendations()$maximizations %>%
       dplyr::mutate_if(is.numeric, ~ ifelse(.x == 0, "", paste0("+", .x, "%"))) %>%
       DT::datatable(
         options = list(
@@ -31,7 +30,7 @@ server <- function(input, output) {
       )
   })
   output$recommendations <- renderTable({
-    req(recommendations)
+    req(recommendations()$table)
     recommendations()$table
   })
 }
