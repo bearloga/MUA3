@@ -1,0 +1,7 @@
+Stat	Name	Effect
+STR	Strength	Increases MELEE, PIERCING, PROJECTILE attack damage dealt
+DUR	Durability	Reduces MELEE, PIERCING, PROJECTILE attack damage taken
+MAS	Mastery	Increases ETHEREAL and ENERGY attack damage dealt
+RES	Resilience	Reduces ETHEREAL and ENERGY attack damage taken
+VIT	Vitality	Affects HP
+ENE	Energy	Affects EP
