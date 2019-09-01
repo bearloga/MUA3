@@ -1,10 +1,10 @@
 library(shiny)
 library(magrittr)
 
+source("utils.R", local = TRUE)
 heroes <- readRDS("data/heroes.rds")
 tidy_affiliations <- readRDS("data/tidy_affiliations.rds")
 affiliation_bonuses <- readRDS("data/affiliation_bonuses.rds")
-source("utils.R")
 
 server <- function(input, output) {
 
