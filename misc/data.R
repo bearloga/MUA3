@@ -1,7 +1,6 @@
 library(magrittr)
-library(zeallot)
 
-affiliation_bonuses <- "raw/bonuses.tsv" %>%
+affiliation_bonuses <- "misc/raw/bonuses.tsv" %>%
   readr::read_tsv(col_types = "ccddd") %>%
   janitor::clean_names() %>%
   tidyr::gather(n, bonus, -c(team, stat)) %>%
@@ -11,7 +10,7 @@ affiliation_bonuses <- "raw/bonuses.tsv" %>%
     n == "x4" ~ 4
   ))
 
-tidy_affiliations <- "raw/affiliations.tsv" %>%
+tidy_affiliations <- "misc/raw/affiliations.tsv" %>%
   readr::read_tsv(col_types = "cci") %>%
   janitor::clean_names() %>%
   dplyr::select(-heroes) %>%
@@ -27,6 +26,6 @@ tidy_affiliations <- "raw/affiliations.tsv" %>%
 
 heroes <- sort(unique(tidy_affiliations$hero))
 
-saveRDS(heroes, "data/heroes.rds")
-saveRDS(tidy_affiliations, "data/tidy_affiliations.rds")
-saveRDS(affiliation_bonuses, "data/affiliation_bonuses.rds")
+saveRDS(heroes, "mua3-app/data/heroes.rds")
+saveRDS(tidy_affiliations, "mua3-app/data/tidy_affiliations.rds")
+saveRDS(affiliation_bonuses, "mua3-app/data/affiliation_bonuses.rds")
