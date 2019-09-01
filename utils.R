@@ -5,7 +5,8 @@ calculate_bonuses <- function(selected_heroes) {
     dplyr::filter(n > 1) %>%
     dplyr::left_join(affiliation_bonuses, by = c("team", "n")) %>%
     dplyr::group_by(stat) %>%
-    dplyr::summarize(bonus = sum(bonus))
+    dplyr::summarize(bonus = sum(bonus)) %>%
+    dplyr::mutate(stat = factor(stat, c("STR", "DUR", "MAS", "RES", "VIT", "ENE")))
 }
 
 potential_bonuses <- function(selected_heroes) {
@@ -24,8 +25,7 @@ produce_recommendations <- function(selected_heroes) {
       possible_bonuses %>%
         dplyr::group_by(stat) %>%
         dplyr::top_n(1, bonus) %>%
-        tidyr::spread(stat, bonus, fill = 0) %>%
-        dplyr::select(hero, STR, DUR, MAS, RES, VIT, ENE)
+        tidyr::spread(stat, bonus, fill = 0)
     },
     "most bonuses" = {
       possible_bonuses %>%
