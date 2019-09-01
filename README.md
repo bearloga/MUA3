@@ -22,3 +22,7 @@ install.packages(c(
   - `calculate_bonuses` accepts a character vector of **4** names and outputs a data frame of stats and their bonuses
   - `potential_bonuses` accepts a character vector of **3** names and runs `calculate_bonuses` with each of the remaining heroes
   - `produce_recommendations` accepts a character vector of **3** names and produces recommendations based on their potential bonuses
+  
+## Licensing
+
+*Core* code in data.R and utils.R is licensed under MIT. The *app* code in ui.R/server.R is licensed under GPL-3.
