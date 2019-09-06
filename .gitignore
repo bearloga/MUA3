@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 app/data/
-rsconnect/shinyapps.io/bearloga/mua3.dcf
+*/rsconnect/shinyapps.io/
 *.rds
+*.dcf

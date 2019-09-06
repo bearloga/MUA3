@@ -11,9 +11,8 @@ affiliation_bonuses <- "misc/raw/bonuses.tsv" %>%
   ))
 
 tidy_affiliations <- "misc/raw/affiliations.tsv" %>%
-  readr::read_tsv(col_types = "cci") %>%
+  readr::read_tsv(col_types = "cc") %>%
   janitor::clean_names() %>%
-  dplyr::select(-heroes) %>%
   tidyr::separate(affiliated_heroes, paste("h", 1:12), sep = ", ", fill = "right") %>%
   tidyr::gather(spot, hero, -team) %>%
   dplyr::select(-spot) %>%
