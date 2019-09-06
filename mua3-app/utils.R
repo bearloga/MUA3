@@ -25,7 +25,8 @@ produce_recommendations <- function(selected_heroes) {
       possible_bonuses %>%
         dplyr::group_by(stat) %>%
         dplyr::top_n(1, bonus) %>%
-        tidyr::spread(stat, bonus, fill = 0)
+        dplyr::group_by(hero) %>%
+        dplyr::summarize(maximizes = paste0(stat, collapse = ", "))
     },
     "most bonuses" = {
       possible_bonuses %>%
@@ -60,9 +61,11 @@ produce_recommendations <- function(selected_heroes) {
     tidyr::spread(criterion, present) %>%
     dplyr::mutate_all(~ ifelse(is.na(.x), emo::ji("x"), .x)) %>%
     dplyr::select(hero, `most bonuses`, average, total, `repeat`)
-
+  recommendations_max <- recommendations$`per-stat maximization` %>%
+    dplyr::left_join(possible_bonuses, by = "hero") %>%
+    tidyr::spread(stat, bonus, fill = 0)
   return(list(
-    maximizations = recommendations$`per-stat maximization`,
+    maximizations = recommendations_max,
     table = recommendations_table
   ))
 }

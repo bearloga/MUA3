@@ -19,12 +19,12 @@ ui <- fluidPage(
           h3("Stat bonus maximization"),
           DT::dataTableOutput("stat_maximizations"),
           includeHTML("includes/stats.html"),
-          width = 6
+          width = 7
         ),
         column(
           includeHTML("includes/categories.html"),
           tableOutput("recommendations"),
-          width = 6
+          width = 5
         )
       ),
       includeHTML("includes/footer.html"),
