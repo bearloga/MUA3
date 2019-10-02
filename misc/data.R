@@ -10,10 +10,19 @@ affiliation_bonuses <- "misc/raw/bonuses.tsv" %>%
     n == "x4" ~ 4
   ))
 
+temp_affiliations <- "misc/raw/affiliations.tsv" %>%
+  readr::read_tsv(col_types = "cc") %>%
+  janitor::clean_names() %>%
+  `[[`("affiliated_heroes") %>%
+  purrr::map(strsplit, split = ", ") %>%
+  purrr::map(~ .x[[1]])
+
+max_affiliated_heroes <- max(purrr::map_int(temp_affiliations, length))
+
 tidy_affiliations <- "misc/raw/affiliations.tsv" %>%
   readr::read_tsv(col_types = "cc") %>%
   janitor::clean_names() %>%
-  tidyr::separate(affiliated_heroes, paste("h", 1:12), sep = ", ", fill = "right") %>%
+  tidyr::separate(affiliated_heroes, paste("h", 1:max_affiliated_heroes), sep = ", ", fill = "right") %>%
   tidyr::gather(spot, hero, -team) %>%
   dplyr::select(-spot) %>%
   dplyr::filter(!is.na(hero))
